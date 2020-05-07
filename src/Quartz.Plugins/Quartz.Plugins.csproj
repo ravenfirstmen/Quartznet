@@ -1,13 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AssemblyTitle>Quartz.NET Plugins</AssemblyTitle>
-    <TargetFrameworks>netstandard2.0;$(TargetFullFrameworkVersion)</TargetFrameworks>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>Quartz</RootNamespace>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="..\AssemblyInfo.cs" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Quartz.Jobs\Quartz.Jobs.csproj" />
   </ItemGroup>

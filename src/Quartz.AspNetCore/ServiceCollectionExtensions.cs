@@ -22,10 +22,11 @@ namespace Quartz.AspNetCore
             return provider;
         }
 
-        public static IApplicationBuilder UseQuartz(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseQuartz(this IApplicationBuilder builder, Action<IScheduler> config = null)
         {
             LogProvider.SetCurrentLogProvider(builder.ApplicationServices.GetRequiredService<LoggingProvider>());
             var scheduler = builder.ApplicationServices.GetRequiredService<IScheduler>();
+            config?.Invoke(scheduler);
             scheduler.Start();
             return builder;
         }
@@ -38,13 +39,14 @@ namespace Quartz.AspNetCore
             optionsAction?.Invoke(builder);
 
             var scheduler = builder.Build();
-            services.AddSingleton(scheduler);
+
+            services.AddSingleton<IScheduler>(scheduler.Result);
             services.AddTransient<ISchedulerFactory, StdSchedulerFactory>();
             services.AddTransient<LoggingProvider>();
             return services;
         }
 
-        private static void AddSimplifiedHostedService(
+        public static void AddSimplifiedHostedService(
             this IServiceCollection services,
             Action<HealthCheckOptions> configureHealthChecks)
         {

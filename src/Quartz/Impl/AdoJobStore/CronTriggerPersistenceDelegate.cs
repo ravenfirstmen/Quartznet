@@ -41,17 +41,11 @@ namespace Quartz.Impl.AdoJobStore
             TablePrefix = tablePrefix;
             DbAccessor = dbAccessor;
             SchedName = schedName;
-
-            // No longer used in this file
-            SchedNameLiteral = "'" + schedName + "'";
         }
 
         protected string TablePrefix { get; private set; }
 
         protected IDbAccessor DbAccessor { get; private set; }
-
-        [Obsolete("Scheduler name is now added to queries as a parameter")]
-        protected string SchedNameLiteral { get; private set; }
 
         protected string SchedName { get; private set; }
 

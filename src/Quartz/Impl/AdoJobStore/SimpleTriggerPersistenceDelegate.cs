@@ -35,9 +35,6 @@ namespace Quartz.Impl.AdoJobStore
 
         protected string TablePrefix { get; private set; }
 
-        [Obsolete("Scheduler name is now added to queries as a parameter")]
-        protected string SchedNameLiteral { get; private set; }
-
         protected string SchedName { get; private set; }
 
         public void Initialize(string tablePrefix, string schedName, IDbAccessor dbAccessor)
@@ -45,9 +42,6 @@ namespace Quartz.Impl.AdoJobStore
             TablePrefix = tablePrefix;
             SchedName = schedName;
             DbAccessor = dbAccessor;
-
-            // No longer required
-            SchedNameLiteral = "'" + schedName + "'";
         }
 
         public string GetHandledTriggerTypeDiscriminator()

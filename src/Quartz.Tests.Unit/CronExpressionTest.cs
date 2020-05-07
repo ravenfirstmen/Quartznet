@@ -532,7 +532,9 @@ namespace Quartz.Tests.Unit
                 return;
             }
 
+#pragma warning disable CS0618 // Type or member is obsolete
             var daylightChange = TimeZone.CurrentTimeZone.GetDaylightChanges(2012);
+#pragma warning restore CS0618 // Type or member is obsolete
             DateTimeOffset before = daylightChange.Start.ToUniversalTime().AddMinutes(-5); // keep outside the potentially undefined interval
             DateTimeOffset? after = expression.GetNextValidTimeAfter(before);
             Assert.IsTrue(after.HasValue);
